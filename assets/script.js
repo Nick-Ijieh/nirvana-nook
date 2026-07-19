@@ -29,6 +29,37 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Header: hides on scroll down, reappears translucent on scroll up
+  var siteHeader = document.querySelector('header');
+  if (siteHeader) {
+    var lastScrollY = window.scrollY;
+    var ticking = false;
+    var REVEAL_THRESHOLD = 80; // px from top before the hide/reveal behavior kicks in
+
+    function updateHeader() {
+      var currentY = window.scrollY;
+      if (currentY < REVEAL_THRESHOLD) {
+        siteHeader.classList.remove('header-hidden', 'header-translucent');
+      } else if (currentY > lastScrollY) {
+        // scrolling down
+        siteHeader.classList.add('header-hidden');
+      } else {
+        // scrolling up
+        siteHeader.classList.remove('header-hidden');
+        siteHeader.classList.add('header-translucent');
+      }
+      lastScrollY = currentY;
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    });
+  }
+
   // Load More reviews on the testimonials page
   var loadMoreBtn = document.querySelector('#load-more-btn');
   if (loadMoreBtn) {
