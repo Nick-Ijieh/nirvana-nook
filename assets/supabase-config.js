@@ -10,7 +10,7 @@
  * (checking availability, submitting a booking). Never put your
  * "service_role" key here or anywhere in your website's files.
  */
-const SUPABASE_URL = "YOUR_PROJECT_URL_HERE";
-const SUPABASE_ANON_KEY = "YOUR_ANON_PUBLIC_KEY_HERE";
+const SUPABASE_URL = "https://ueyyzshhqizcgnzleigg.supabase.co/rest/v1/";
+const SUPABASE_ANON_KEY = "sb_publishable_LAtHC-tvEm4JoNpT8ImqlQ_ydI0xWiT";
 
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
