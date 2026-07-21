@@ -74,15 +74,4 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
-
-  // Simple front-end booking form handler (no backend wired up yet)
-  var bookingForm = document.querySelector('#booking-form');
-  if (bookingForm) {
-    bookingForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var confirmation = document.querySelector('#booking-confirmation');
-      bookingForm.style.display = 'none';
-      if (confirmation) confirmation.style.display = 'block';
-    });
-  }
 });

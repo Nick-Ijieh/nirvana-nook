@@ -1,0 +1,3 @@
+publicAPI key: sb_publishable_LAtHC-tvEm4JoNpT8ImqlQ_ydI0xWiT
+
+API URL: https://ueyyzshhqizcgnzleigg.supabase.co/rest/v1/

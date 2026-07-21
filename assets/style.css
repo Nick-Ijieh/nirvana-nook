@@ -410,6 +410,17 @@ section{ padding:120px 0; position:relative; }
 }
 .note-box strong{ color:var(--ink); }
 
+.slot-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.slot-btn{
+  padding:12px 8px; border:1px solid var(--line); border-radius:10px;
+  background:var(--card); font-family:'Jost',sans-serif; font-size:13.5px;
+  color:var(--ink); transition:all .25s ease;
+}
+.slot-btn:hover{ background:var(--sage); color:#fff; border-color:var(--sage); }
+@media (max-width:760px){
+  .slot-grid{ grid-template-columns:repeat(2,1fr); }
+}
+
 /* ---------- Blog ---------- */
 .blog-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
 .blog-card{ display:block; text-align:center; }
