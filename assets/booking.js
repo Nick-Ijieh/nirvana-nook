@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
   dateInput.setAttribute("min", todayStr);
 
   const STAFF_COUNT = 2;
-  const BUFFER_MINUTES = 20;
+  const BUFFER_MINUTES = 15;
   const SLOT_STEP_MINUTES = 15;
   const CAPE_TOWN_OFFSET = "+02:00"; // South Africa Standard Time, no daylight saving
 
