@@ -59,19 +59,4 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
-
-  // Load More reviews on the testimonials page
-  var loadMoreBtn = document.querySelector('#load-more-btn');
-  if (loadMoreBtn) {
-    var BATCH_SIZE = 6;
-    loadMoreBtn.addEventListener('click', function () {
-      var hidden = document.querySelectorAll('#testi-grid .review-hidden');
-      for (var i = 0; i < Math.min(BATCH_SIZE, hidden.length); i++) {
-        hidden[i].classList.remove('review-hidden');
-      }
-      if (document.querySelectorAll('#testi-grid .review-hidden').length === 0) {
-        loadMoreBtn.style.display = 'none';
-      }
-    });
-  }
 });
