@@ -59,4 +59,34 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+
+  // Add a small "copy" button next to every email link on the site.
+  // The mailto: link still opens the visitor's own mail app if they have
+  // one set up -- this is just a fallback for anyone who doesn't, so the
+  // email address is always usable one way or another.
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function (link) {
+    var email = link.getAttribute('href').replace('mailto:', '').split('?')[0];
+
+    var copyBtn = document.createElement('button');
+    copyBtn.type = 'button';
+    copyBtn.className = 'copy-email-btn';
+    copyBtn.setAttribute('aria-label', 'Copy email address');
+    copyBtn.title = 'Copy email address';
+    copyBtn.innerHTML = '&#128203;';
+
+    copyBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      navigator.clipboard.writeText(email).then(function () {
+        var original = copyBtn.innerHTML;
+        copyBtn.innerHTML = '&#10003;';
+        copyBtn.classList.add('copied');
+        setTimeout(function () {
+          copyBtn.innerHTML = original;
+          copyBtn.classList.remove('copied');
+        }, 1800);
+      });
+    });
+
+    link.insertAdjacentElement('afterend', copyBtn);
+  });
 });

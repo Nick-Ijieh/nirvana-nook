@@ -387,6 +387,7 @@ section{ padding:120px 0; position:relative; }
 .field.full{ grid-column:1 / -1; }
 .field label{ font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); }
 .field input, .field select, .field textarea{
+  width:100%; max-width:100%; min-width:0; box-sizing:border-box;
   border:1px solid var(--line); background:var(--card);
   border-radius:10px; padding:14px 16px; font-family:'Jost',sans-serif; font-size:14.5px; color:var(--ink);
 }
@@ -496,3 +497,14 @@ footer{ background:var(--ink); color:rgba(246,240,230,0.7); padding:70px 0 26px;
   .booking-card{ padding:28px; }
   .service-row .media{ aspect-ratio:16/10; }
 }
+
+/* ---------- Copy-email fallback button ---------- */
+.copy-email-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:22px; height:22px; margin-left:6px;
+  border:none; background:transparent; color:inherit;
+  font-size:12px; opacity:0.6; vertical-align:middle;
+  transition:opacity .2s ease, transform .2s ease;
+}
+.copy-email-btn:hover{ opacity:1; }
+.copy-email-btn.copied{ opacity:1; transform:scale(1.15); }
