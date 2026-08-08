@@ -11,6 +11,6 @@
  * "service_role" key here or anywhere in your website's files.
  */
 const SUPABASE_URL = "https://ueyyzshhqizcgnzleigg.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVleXl6c2hocWl6Y2duemxlaWdnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ0NjI3MzcsImV4cCI6MjEwMDAzODczN30.9Vk_DAjjqdqRyHKA-68fwzjQhZomijARiqyqfKWz5Jo";
+const SUPABASE_ANON_KEY = "sb_publishable_LAtHC-tvEm4JoNpT8ImqlQ_ydI0xWiT";
 
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
