@@ -77,6 +77,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     return false;
   }
+  function isSlotAvailableForBoth(staffTimelines, start, end) {
+    return staffTimelines.every(function (timeline) {
+      return fitsOnStaffTrack(timeline, start, end);
+    });
+  }
+  function requiresBothStaff(serviceName) {
+    return serviceName === "Couples Massage";
+  }
 
   let selectedSlot = null; // { startISO, endISO, displayStart, durationMinutes, serviceName }
 
@@ -118,10 +126,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const { open, close } = hoursForDate(dateStr);
       const openMin = toMinutes(open);
       const closeMin = toMinutes(close);
+      const needsBoth = requiresBothStaff(serviceName);
 
       const availableTimes = [];
       for (let t = openMin; t + durationMinutes <= closeMin; t += SLOT_STEP_MINUTES) {
-        if (isSlotAvailable(staffTimelines, t, t + durationMinutes)) {
+        const fits = needsBoth
+          ? isSlotAvailableForBoth(staffTimelines, t, t + durationMinutes)
+          : isSlotAvailable(staffTimelines, t, t + durationMinutes);
+        if (fits) {
           availableTimes.push(t);
         }
       }
@@ -186,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const name = document.querySelector("#bk-name").value;
     const phone = document.querySelector("#bk-phone").value;
-    const email = document.querySelector("#bk-email").value;
+    const email = document.querySelector("#bk-email").value || null;
 
     try {
       const { data, error } = await supabaseClient.rpc("book_treatment", {
@@ -197,6 +209,7 @@ document.addEventListener("DOMContentLoaded", function () {
         p_client_name: name,
         p_client_email: email,
         p_client_phone: phone,
+        p_both_staff: requiresBothStaff(selectedSlot.serviceName),
       });
 
       if (error) {
