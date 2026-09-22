@@ -223,6 +223,17 @@ document.addEventListener("DOMContentLoaded", function () {
       step3.style.display = "none";
       confirmationDetail.textContent = `Your ${selectedSlot.serviceName} is confirmed for ${selectedSlot.displayStart}. We'll see you then!`;
       confirmationBox.style.display = "block";
+
+      // Tell Google Ads a real booking just happened
+      if (typeof gtag === "function") {
+        const bookingId = (data && data[0] && data[0].booking_id) ? String(data[0].booking_id) : "";
+        gtag('event', 'conversion', {
+          'send_to': 'AW-18424867589/OVOucPvx-YAdEIXW1NFE',
+          'value': 1.0,
+          'currency': 'ZAR',
+          'transaction_id': bookingId
+        });
+      }
     } catch (err) {
       console.error(err);
       alert("Something went wrong confirming your booking. Please try again or contact us directly.");
