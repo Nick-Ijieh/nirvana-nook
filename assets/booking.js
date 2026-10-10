@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (typeof gtag === "function") {
         const bookingId = (data && data[0] && data[0].booking_id) ? String(data[0].booking_id) : "";
         gtag('event', 'conversion', {
-          'send_to': 'AW-18424867589/OVOucPvx-YAdEIXW1NFE',
+          'send_to': 'AW-18424867589/OVOuCPvx-YAdEIXW1NFE',
           'value': 1.0,
           'currency': 'ZAR',
           'transaction_id': bookingId
