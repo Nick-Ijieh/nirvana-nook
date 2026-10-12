@@ -508,3 +508,19 @@ footer{ background:var(--ink); color:rgba(246,240,230,0.7); padding:70px 0 26px;
 }
 .copy-email-btn:hover{ opacity:1; }
 .copy-email-btn.copied{ opacity:1; transform:scale(1.15); }
+
+/* ---- Mobile Spa page ---- */
+.mobile-intro{ max-width:760px; margin:0 auto 40px; text-align:center; }
+.mobile-intro h2{ margin-top:18px; }
+.mobile-intro p{ color:var(--ink-soft); margin-top:16px; }
+.mobile-info{ display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:960px; margin:0 auto 56px; }
+.mobile-info .info-card{ background:var(--card); border:1px solid var(--line); border-radius:6px; padding:34px 32px; text-align:center; }
+.mobile-info .info-card h3{ font-size:26px; margin:0 0 12px; }
+.mobile-info .info-card p{ color:var(--ink-soft); font-size:15px; line-height:1.7; margin:0 0 12px; }
+.mobile-info .info-card .fee{ font-family:'Cormorant Garamond',serif; font-size:40px; color:var(--sage-deep); line-height:1.1; margin:6px 0 14px; }
+.mobile-info .info-card .actions{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px; }
+.mobile-info .info-card strong{ color:var(--ink); font-weight:500; }
+.mobile-info .info-card .tel{ color:var(--sage-deep); font-weight:500; white-space:nowrap; }
+@media (max-width:760px){ .mobile-info{ grid-template-columns:1fr; } .mobile-info .info-card{ padding:28px 22px; } }
+.booking-note{ max-width:820px; margin:0 auto 26px; padding:16px 22px; background:var(--card); border:1px solid var(--line); border-radius:6px; text-align:center; font-size:14.5px; color:var(--ink-soft); }
+.booking-note a{ color:var(--sage-deep); font-weight:500; text-decoration:underline; }
