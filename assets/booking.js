@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
   function requiresBothStaff(serviceName) {
-    return serviceName === "Couples Massage";
+    return serviceName === "Couples Massage" || serviceName === "Lovebirds Package";
   }
 
   let selectedSlot = null; // { startISO, endISO, displayStart, durationMinutes, serviceName }
