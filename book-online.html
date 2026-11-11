@@ -123,19 +123,19 @@
               
               <optgroup label="Full Body Massages">
                 <option data-duration="60">Swedish Massage (60 min) &mdash; R550</option>
-                <option data-duration="90">Swedish Massage (90 min) &mdash; R750</option>
+                <option data-duration="90" data-special="20">Swedish Massage (90 min) &mdash; R750</option>
                 <option data-duration="60">Aromatherapy Massage (60 min) &mdash; R580</option>
-                <option data-duration="90">Aromatherapy Massage (90 min) &mdash; R780</option>
+                <option data-duration="90" data-special="20">Aromatherapy Massage (90 min) &mdash; R780</option>
                 <option data-duration="60">Thai Deep Tissue Oil Massage (60 min) &mdash; R600</option>
-                <option data-duration="90">Thai Deep Tissue Oil Massage (90 min) &mdash; R800</option>
+                <option data-duration="90" data-special="20">Thai Deep Tissue Oil Massage (90 min) &mdash; R800</option>
                 <option data-duration="60">Lymphatic Drainage Massage (60 min) &mdash; R600</option>
-                <option data-duration="90">Lymphatic Drainage Massage (90 min) &mdash; R800</option>
+                <option data-duration="90" data-special="20">Lymphatic Drainage Massage (90 min) &mdash; R800</option>
                 <option data-duration="60">Couples Massage (60 min) &mdash; R1100</option>
-                <option data-duration="90">Couples Massage (90 min) &mdash; R1500</option>
+                <option data-duration="90" data-special="20">Couples Massage (90 min) &mdash; R1500</option>
                 <option data-duration="60">Hot Stone Therapy (60 min) &mdash; R650</option>
-                <option data-duration="90">Hot Stone Therapy (90 min) &mdash; R850</option>
+                <option data-duration="90" data-special="20">Hot Stone Therapy (90 min) &mdash; R850</option>
                 <option data-duration="60">Prenatal Massage (60 min) &mdash; R550</option>
-                <option data-duration="90">Prenatal Massage (90 min) &mdash; R750</option>
+                <option data-duration="90" data-special="20">Prenatal Massage (90 min) &mdash; R750</option>
               </optgroup>
               <optgroup label="Targeted Massages">
                 <option data-duration="45">Back, Neck &amp; Shoulder Massage (45 min) &mdash; R450</option>
@@ -166,6 +166,9 @@
           <div class="field full">
             <label for="bk-date">Date</label>
             <input type="date" id="bk-date" required>
+          </div>
+          <div class="field full" id="bk-special-wrap" style="display:none;">
+            <p id="bk-special-note" style="font-size:14px; color:var(--sage-deep); background:var(--stone); padding:12px 16px; border-radius:4px 14px 4px 14px;"></p>
           </div>
         </div>
         <button type="button" id="bk-check-btn" class="btn btn-primary btn-block" style="margin-top:24px;">Check Available Times</button>

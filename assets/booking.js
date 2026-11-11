@@ -33,6 +33,66 @@ document.addEventListener("DOMContentLoaded", function () {
   const todayStr = new Date().toISOString().slice(0, 10);
   dateInput.setAttribute("min", todayStr);
 
+  // ---------------------------------------------------------------
+  // Weekly special: 20% off any 90 minute massage for appointments
+  // from Wed 11 to Wed 18 November 2026 (inclusive).
+  // Options eligible for the special carry data-special="20" in the HTML.
+  // To change or remove the special later, edit these dates / percent,
+  // or delete the data-special attributes in book-online.html.
+  // ---------------------------------------------------------------
+  const SPECIAL = { start: "2026-11-11", end: "2026-11-18", percent: 20 };
+  const specialWrap = document.querySelector("#bk-special-wrap");
+  const specialNote = document.querySelector("#bk-special-note");
+  Array.from(serviceSelect.options).forEach(function (o) { o.dataset.label = o.textContent; });
+
+  function basePrice(opt) {
+    const m = opt.dataset.label.match(/R(\d+)\s*$/);
+    return m ? parseInt(m[1], 10) : null;
+  }
+  function discounted(n) { return Math.round(n * (100 - SPECIAL.percent) / 100); }
+  function dateInSpecial(dateStr) { return !!dateStr && dateStr >= SPECIAL.start && dateStr <= SPECIAL.end; }
+  // Returns { was, now } when the special applies to this option and date, else null
+  function specialPriceFor(opt, dateStr) {
+    if (!opt || !opt.hasAttribute("data-special") || !dateInSpecial(dateStr)) return null;
+    const was = basePrice(opt);
+    return was ? { was: was, now: discounted(was) } : null;
+  }
+
+  function refreshSpecial() {
+    const dateStr = dateInput.value;
+    // Update the dropdown labels so prices show the special for dates in the window
+    Array.from(serviceSelect.options).forEach(function (o) {
+      if (!o.hasAttribute("data-special")) return;
+      const sp = specialPriceFor(o, dateStr);
+      o.textContent = sp
+        ? o.dataset.label.replace(/R\d+\s*$/, "R" + sp.now + " (" + SPECIAL.percent + "% off, was R" + sp.was + ")")
+        : o.dataset.label;
+    });
+
+    // Hide the note entirely once the special is over
+    if (todayStr > SPECIAL.end) { specialWrap.style.display = "none"; return; }
+
+    const opt = serviceSelect.selectedOptions[0];
+    const eligible = opt && opt.hasAttribute("data-special");
+    let msg = "";
+    if (!dateStr) {
+      msg = SPECIAL.percent + "% off any 90 minute massage for appointments from Wed 11 to Wed 18 November. Choose a date to see your price.";
+    } else if (dateInSpecial(dateStr)) {
+      const sp = specialPriceFor(opt, dateStr);
+      msg = sp ? "Special applied: " + SPECIAL.percent + "% off, so your price is R" + sp.now + " (normally R" + sp.was + ")."
+               : SPECIAL.percent + "% special applies to 90 minute massages on this date.";
+    } else if (eligible) {
+      msg = "The " + SPECIAL.percent + "% special applies to appointments from Wed 11 to Wed 18 November.";
+    } else {
+      msg = SPECIAL.percent + "% off 90 minute massages for appointments from Wed 11 to Wed 18 November.";
+    }
+    specialNote.textContent = msg;
+    specialWrap.style.display = "block";
+  }
+  dateInput.addEventListener("change", refreshSpecial);
+  serviceSelect.addEventListener("change", refreshSpecial);
+  refreshSpecial();
+
   const STAFF_COUNT = 2;
   const BUFFER_MINUTES = 15;
   const SLOT_STEP_MINUTES = 15;
@@ -169,6 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
             displayStart: `${formatDisplayTime(timeStr)} on ${dateStr}`,
             durationMinutes: durationMinutes,
             serviceName: serviceName,
+            specialPrice: specialPriceFor(serviceSelect.selectedOptions[0], dateStr),
           };
           step2.style.display = "none";
           step3.style.display = "block";
@@ -221,7 +282,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       step3.style.display = "none";
-      confirmationDetail.textContent = `Your ${selectedSlot.serviceName} is confirmed for ${selectedSlot.displayStart}. We'll see you then!`;
+      confirmationDetail.textContent = `Your ${selectedSlot.serviceName} is confirmed for ${selectedSlot.displayStart}. We'll see you then!` +
+        (selectedSlot.specialPrice ? ` Special price: R${selectedSlot.specialPrice.now} (${SPECIAL.percent}% off).` : "");
       confirmationBox.style.display = "block";
 
       // Tell Google Ads a real booking just happened
